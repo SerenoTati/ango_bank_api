@@ -1,13 +1,13 @@
-from flask import Flask, jsonify
+from flask import Blueprint, jsonify
 
 from src.repository.exchance_rate_repository import ExchangeRateRepository
 from src.services.bai_exchange_service import BAIExchangeService
 
-app = Flask(__name__)
+rate_endpoint_blueprint = Blueprint('rate_endpoint_blueprint', __name__)
 
 
 
-@app.route('api/v1/rates/bai', methods=['GET'])
+@rate_endpoint_blueprint.route('/api/v1/rates/bai', methods=['GET'])
 def get_bai_rates():
     bai_repository = ExchangeRateRepository(BAIExchangeService())
     """
@@ -15,13 +15,17 @@ def get_bai_rates():
     """
     try:
         
-        bai_rates =bai_repository.get_rates('https://bai.com/exchange-rates')
-        return jsonify(bai_rates), 200
+        rates =bai_repository.get_rates('https://www.bancobai.ao/pt/cambios-e-valores', cert_path='/assets/certificates/www.bancobai.ao.pem')
+        if not rates:
+            return jsonify({"error": "No exchange rates found."}), 404
+
+        bai_rates = [rate.to_dict() for rate in rates]
+        return jsonify({'bai':bai_rates})
     
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return {"error": str(e)}, 500
     
-@app.route('api/v1/rates/all', methods=['GET'])
+@rate_endpoint_blueprint.route('/api/v1/rates/all', methods=['GET'])
 def get_all_rates():
     """
     Endpoint to get exchange rates from all sources.

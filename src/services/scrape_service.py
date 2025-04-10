@@ -10,7 +10,7 @@ class ScrapeService(ABC):
     """
 
     @abstractmethod
-    def get_rates(self, url: str) -> list[ExchangeRateModel]:
+    def get_rates(self, url: str, cert_path:str='') -> list[ExchangeRateModel]:
         """
         Fetches content from the given URL and returns a list of ExchangeRateModel.
         """

@@ -1,6 +1,6 @@
-from unittest.mock import Mock
+from unittest.mock import  Mock
 from src.repository.exchance_rate_repository import ExchangeRateRepository
-from src.services.scrap_service import ScrapeService
+from src.services.scrape_service import ScrapeService
 
 mocked_rates = [
     {
@@ -29,7 +29,8 @@ def test_get_rates():
 
    mock_scrape_service.get_rates.return_value = mocked_rates
    url = "https://www.example.com/rates"
-   request = ExchangeRateRepository(mock_scrape_service).get_rates(url)
+   cert_path = 'assets/certificates/www.bancobai.ao.pem'
+   request = ExchangeRateRepository(mock_scrape_service).get_rates(url,)
 
    assert request[0]["currency"] == "AED"
    assert request[0]["currency_name"] == "Dirham Emirados Arabes"

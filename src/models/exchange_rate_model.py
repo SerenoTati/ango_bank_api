@@ -1,6 +1,12 @@
 
 class ExchangeRateModel:
-    def __init__(self, currency: str, buy_rate: float, sell_rate: float):
+    """
+    This class represents an exchange rate model.
+    """
+    #
+
+
+    def __init__(self, currency: dict, buy_rate: str, sell_rate: str):
         """
         Initializes the ExchangeRateModel with currency name, buy rate, and sell rate.
         """
@@ -8,7 +14,7 @@ class ExchangeRateModel:
         self.buy_rate = buy_rate
         self.sell_rate = sell_rate
         
-    @classmethod
+
     def to_dict(self):
         """
         Converts the ExchangeRateModel instance to a dictionary.
@@ -24,11 +30,11 @@ class ExchangeRateModel:
         Creates an ExchangeRateModel instance from a dictionary.
         """
         return cls(
-            currency=data['currency'],
-            buy_rate=float(data['buy_rate']),
-            sell_rate=float(data['sell_rate'])
+            currency = data['currency'],
+            buy_rate=data['buy_rate'],
+            sell_rate=data['sell_rate']
         )
-    @classmethod
+
     def to_json(self):
         """
         Converts the ExchangeRateModel instance to a JSON string.
