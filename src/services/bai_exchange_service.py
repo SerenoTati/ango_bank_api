@@ -12,6 +12,7 @@ class BAIExchangeService(ScrapeService):
     """
     This class implements the scrap_service interface for scraping data from Bai.
     """
+    def __init__(self):
     @classmethod
     def fetch_content(cls, url: str):
         response = requests.get(url)

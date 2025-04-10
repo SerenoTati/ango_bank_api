@@ -1,5 +1,4 @@
-from pytest_mock import mocker
-
+from unittest.mock import Mock
 from src.repository.exchance_rate_repository import ExchangeRateRepository
 from src.services.scrap_service import ScrapeService
 
@@ -26,11 +25,11 @@ mocked_rates = [
 
 def test_get_rates():
  
-   mock_scrap_service = mocker.Mock(spec=ScrapeService)
+   mock_scrape_service =  Mock(spec=ScrapeService)
 
-   mock_scrap_service.get_rates.return_value = mocked_rates
+   mock_scrape_service.get_rates.return_value = mocked_rates
    url = "https://www.example.com/rates"
-   request = ExchangeRateRepository(mock_scrap_service).get_rates(url)
+   request = ExchangeRateRepository(mock_scrape_service).get_rates(url)
 
    assert request[0]["currency"] == "AED"
    assert request[0]["currency_name"] == "Dirham Emirados Arabes"
