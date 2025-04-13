@@ -1,3 +1,4 @@
+import json
 
 class ExchangeRateModel:
     """
@@ -39,6 +40,6 @@ class ExchangeRateModel:
         """
         Converts the ExchangeRateModel instance to a JSON string.
         """
-        import json
+     
         return json.dumps(self.to_dict())
   

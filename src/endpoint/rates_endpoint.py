@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify
 
 from src.repository.exchance_rate_repository import ExchangeRateRepository
-from src.services.bai_exchange_service import BAIExchangeService
+from services.implementations.bai_exchange_service import BAIExchangeService
 
 rate_endpoint_blueprint = Blueprint('rate_endpoint_blueprint', __name__)
 

@@ -1,4 +1,3 @@
-from locale import currency
 from typing import override
 
 import requests
