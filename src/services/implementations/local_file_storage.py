@@ -3,7 +3,6 @@ import os
 
 from services.file_storage_service import FileStorageService
 
-
 class LocalFileStorage(FileStorageService):
 
     def save(self, file_path: str, content: str) -> None:

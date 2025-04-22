@@ -1,13 +1,13 @@
 from flask import Blueprint, jsonify
 
 from src.repository.exchance_rate_repository import ExchangeRateRepository
-from services.implementations.bai_exchange_service import BAIExchangeService
+from src.services.implementations.bai_exchange_service import BAIExchangeService
 
-rate_endpoint_blueprint = Blueprint('rate_endpoint_blueprint', __name__)
+rate_endpoint_blueprint = Blueprint('rate_endpoint_blueprint', __name__, url_prefix='/api/v1/rates')
 
 
 
-@rate_endpoint_blueprint.route('/api/v1/rates/bai', methods=['GET'])
+@rate_endpoint_blueprint.route('/bai', methods=['GET'])
 def get_bai_rates():
     bai_repository = ExchangeRateRepository(BAIExchangeService())
     """
@@ -25,7 +25,7 @@ def get_bai_rates():
     except Exception as e:
         return {"error": str(e)}, 500
     
-@rate_endpoint_blueprint.route('/api/v1/rates/all', methods=['GET'])
+@rate_endpoint_blueprint.route('/all', methods=['GET'])
 def get_all_rates():
     """
     Endpoint to get exchange rates from all sources.
